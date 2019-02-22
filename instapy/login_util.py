@@ -278,9 +278,10 @@ def login_user(browser,
     # wait until page fully load
     explicit_wait(browser, "PFL", [], logger, 5)
 
-    # Check if user is logged-in (If there's two 'nav' elements)
-    nav = browser.find_elements_by_xpath('//nav')
-    if len(nav) == 2:
+    web_address_navigator(browser, "https://www.instagram.com/%22+username)
+    # Check if user is logged-in (If there is profile button<span>)
+    span_chk = browser.find_elements_by_xpath("//span[@aria-label='Profile']")
+    if len(span_chk) > 0:
         # create cookie for username
         pickle.dump(browser.get_cookies(), open(
             '{0}{1}_cookie.pkl'.format(logfolder, username), 'wb'))
